@@ -1,7 +1,7 @@
 import Card from "../components/Card";
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
+import Toastify from 'toastify-js'
 import gearLoad from "../components/assets/Gear-0.2s-264px.svg"
 
 export default function Home({ url }) {
@@ -15,10 +15,21 @@ export default function Home({ url }) {
             const { data } = await axios.get(`${url}/apis/pub/branded-things/products?q=${search}&limit=8&page=1&sort=ASC`);
             setProducts(data.data.query);
         } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: error.response.data.error,
-            });
+            Toastify({
+                text: error.response.data.error,
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "#EF4C54",
+                    color: "#17202A",
+                    boxShadow: "0 5px 10px black",
+                    fontWeight: "bold"
+                }
+            }).showToast();
         } finally {
             setLoading(false)
         }

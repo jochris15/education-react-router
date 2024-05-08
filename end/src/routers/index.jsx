@@ -4,6 +4,7 @@ import BaseLayout from '../views/BaseLayout'
 import Home from '../views/Home'
 import ProductsForm from '../views/ProductsForm'
 import Detail from "../views/Detail";
+import Toastify from 'toastify-js'
 const url = 'https://phase2-aio.vercel.app'
 
 const router = createBrowserRouter([
@@ -12,6 +13,21 @@ const router = createBrowserRouter([
         element: <Login url={url} />,
         loader: () => {
             if (localStorage.token) {
+                Toastify({
+                    text: "You already logged in",
+                    duration: 2000,
+                    newWindow: true,
+                    close: true,
+                    gravity: "bottom",
+                    position: "right",
+                    stopOnFocus: true,
+                    style: {
+                        background: "#EF4C54",
+                        color: "#17202A",
+                        boxShadow: "0 5px 10px black",
+                        fontWeight: "bold"
+                    }
+                }).showToast();
                 return redirect('/')
             }
 
@@ -22,6 +38,21 @@ const router = createBrowserRouter([
         element: <BaseLayout />,
         loader: () => {
             if (!localStorage.token) {
+                Toastify({
+                    text: "Please log in first",
+                    duration: 2000,
+                    newWindow: true,
+                    close: true,
+                    gravity: "bottom",
+                    position: "right",
+                    stopOnFocus: true,
+                    style: {
+                        background: "#EF4C54",
+                        color: "#17202A",
+                        boxShadow: "0 5px 10px black",
+                        fontWeight: "bold"
+                    }
+                }).showToast();
                 return redirect('/login')
             }
 

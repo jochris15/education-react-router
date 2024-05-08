@@ -1,7 +1,22 @@
-
+import Toastify from 'toastify-js'
 export default function Nav({ setPage }) {
     function handleLogout() {
         localStorage.clear()
+        Toastify({
+            text: "Success Logout",
+            duration: 2000,
+            newWindow: true,
+            close: true,
+            gravity: "bottom",
+            position: "right",
+            stopOnFocus: true,
+            style: {
+                background: "#00B29F",
+                color: "#17202A",
+                boxShadow: "0 5px 10px black",
+                fontWeight: "bold"
+            }
+        }).showToast();
         setPage('login')
     }
     return (<>

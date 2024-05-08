@@ -1,4 +1,4 @@
-import Swal from "sweetalert2";
+import Toastify from 'toastify-js'
 import axios from 'axios';
 import { useState } from 'react'
 import { useNavigate } from "react-router-dom";
@@ -14,11 +14,37 @@ export default function Login({ url }) {
             let { data } = await axios.post(`${url}/apis/login`, { email, password });
             localStorage.setItem("token", data.data.access_token);
             navigate('/')
+            Toastify({
+                text: "Success Login",
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "#00B29F",
+                    color: "#17202A",
+                    boxShadow: "0 5px 10px black",
+                    fontWeight: "bold"
+                }
+            }).showToast();
         } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: error.response.data.error
-            })
+            Toastify({
+                text: error.response.data.error,
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "#EF4C54",
+                    color: "#17202A",
+                    boxShadow: "0 5px 10px black",
+                    fontWeight: "bold"
+                }
+            }).showToast();
         }
     }
 

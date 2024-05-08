@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from 'axios'
-import Swal from "sweetalert2";
+import Toastify from 'toastify-js'
 import gearLoad from '../components/assets/Gear-0.2s-264px.svg'
 
 export default function Detail({ url }) {
@@ -15,10 +15,21 @@ export default function Detail({ url }) {
             const { data } = await axios.get(`${url}/apis/pub/branded-things/products/${id}`);
             setProduct(data.data);
         } catch (error) {
-            Swal.fire({
-                icon: "error",
-                title: error.response.data.error,
-            });
+            Toastify({
+                text: error.response.data.error,
+                duration: 2000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom",
+                position: "right",
+                stopOnFocus: true,
+                style: {
+                    background: "#EF4C54",
+                    color: "#17202A",
+                    boxShadow: "0 5px 10px black",
+                    fontWeight: "bold"
+                }
+            }).showToast();
         } finally {
             setLoading(false)
         }
