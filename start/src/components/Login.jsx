@@ -2,10 +2,9 @@ import axios from 'axios';
 import { useState } from 'react'
 import Toastify from 'toastify-js'
 
-export default function Login({ setPage }) {
+export default function Login({ setPage, url }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const url = 'https://phase2-aio.vercel.app'
 
     async function handleLogin(event) {
         event.preventDefault();

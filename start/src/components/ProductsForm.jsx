@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axios from 'axios';
 import Toastify from 'toastify-js'
 
-export default function ProductsForm({ setPage }) {
+export default function ProductsForm({ setPage, url }) {
     const token = localStorage.access_token
     const [name, setName] = useState("")
     const [description, setDescription] = useState("")
@@ -11,7 +11,6 @@ export default function ProductsForm({ setPage }) {
     const [stock, setStock] = useState(0)
     const [categoryId, setCategoryId] = useState("")
     const [categories, setCategories] = useState([]);
-    const url = 'https://phase2-aio.vercel.app'
 
     async function fetchCategories() {
         try {

@@ -4,11 +4,11 @@ import { useEffect, useState } from "react";
 import Toastify from 'toastify-js'
 import gearLoad from "./assets/Gear-0.2s-264px.svg"
 
-export default function Home() {
+export default function Home({ url }) {
     const [products, setProducts] = useState([]);
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState('')
-    const url = 'https://phase2-aio.vercel.app'
+
     async function fetchProducts() {
         try {
             setLoading(true)
