@@ -8,9 +8,8 @@ import { useEffect } from 'react'
 
 export default function App() {
     const [page, setPage] = useState('home')
-    let token = localStorage.access_token
     useEffect(() => {
-        if (token) {
+        if (localStorage.access_token) {
             setPage("home")
         } else {
             setPage("login")
@@ -20,9 +19,9 @@ export default function App() {
     return (
         <>
             <Nav setPage={setPage} />
-            {token && page === 'home' && <Home />}
-            {!token && page === 'login' && <Login setPage={setPage} />}
-            {token && page === 'form' && <ProductsForm setPage={setPage} />}
+            {localStorage.access_token && page === 'home' && <Home />}
+            {!localStorage.access_token && page === 'login' && <Login setPage={setPage} />}
+            {localStorage.access_token && page === 'form' && <ProductsForm setPage={setPage} />}
         </>
     )
 }

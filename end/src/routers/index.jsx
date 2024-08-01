@@ -5,7 +5,7 @@ import Home from '../views/Home'
 import ProductsForm from '../views/ProductsForm'
 import Detail from "../views/Detail";
 import Toastify from 'toastify-js'
-const url = 'https://phase2-aio.vercel.app'
+const url = 'https://h8-phase2-gc.vercel.app'
 
 const router = createBrowserRouter([
     {

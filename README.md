@@ -2,14 +2,9 @@
 [Dokumentasi React Router](https://reactrouter.com/en/main/start/tutorial)
 
 ## Konfigurasi Router
+Buatlah sebuah folder router berisikan index.js (kita akan createRouter disini)
 ```
-import * as React from "react";
-import * as ReactDOM from "react-dom/client";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import "./index.css";
+import {createBrowserRouter,} from "react-router-dom";
 
 const router = createBrowserRouter([
   {
@@ -18,17 +13,9 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+export default router
 ```
 Jangan taro di app.jsx, kenapa? karena setiap kita merender app.jsx, routerny juga akan kerender ulang, harusnya routernya hanya sekali aja di render, jadi baiknya dipisah
-<br>
-<br>
-Buatlah sebuah folder router berisikan index.js (kita akan createRouter disini)
-
 
 ## Navigation
 Jika kita menggunakan anchor tag untuk berpindah halaman, yang terjadi adalah ada proses refresh ketika berpindah halaman, padahal kita menerapkan konsep SPA (Single Page Application), berarti masih ada yang salah untuk cara navigasinya. Kita bisa menggunakan **Link Component**.
@@ -44,16 +31,10 @@ Jika kita tadi bisa melakukan navigasi menggunakan link component, selain itu ki
 
 Contoh, ketika kita memencet gambar item, lalu berpindah ke halaman detail, kita dapat menggunakan **Programmatic navigation**
 
-
 ### - useNavigate
 Untuk menggunakan programmatic navigation, kita perlu hooks **useNavigate**
 <br>
 [Dokumentasi useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)
-
-### - useParams
-Untuk menangkap params yang dikirim lewat router, kita perlu menggunakan hooks **useParams**
-<br>
-[Dokumentasi useParams](https://reactrouter.com/en/main/hooks/use-params)
 
 ## Nested Routes
 Kita bisa membuat sebuah routingan yang bersarang.
@@ -95,6 +76,11 @@ Jika kita ingin menuliskan path di parent page dan childrennya pun masing2 memil
         ]
 }
 ```
+
+## - Params
+Untuk menangkap params yang dikirim lewat router, kita perlu menggunakan hooks **useParams**
+<br>
+[Dokumentasi useParams](https://reactrouter.com/en/main/hooks/use-params)
 
 ## Protected Routes
 Protected Routes maksudnya adalah untuk memproteksi routingan kita, contoh ketika belum login , kita tidak bisa ke halaman home
