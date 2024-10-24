@@ -1,4 +1,9 @@
 export default function Navbar({ setPage }) {
+    function handleLogout() {
+        localStorage.clear()
+        setPage('login')
+    }
+    
     return (
         <>
             {/* navbar */}
@@ -14,7 +19,7 @@ export default function Navbar({ setPage }) {
                         <span>Add Product</span>
                     </a>
                     <a className="text-2xl font-bold px-6 cursor-pointer text-white"
-                        onClick={() => setPage('login')}>
+                        onClick={handleLogout}>
                         <span>Logout</span>
                     </a>
                 </div>
