@@ -1,28 +1,26 @@
-import { useState } from 'react'
-import './App.css'
-import Nav from './components/Nav'
-import Home from './components/Home'
-import Login from './components/Login'
-import ProductsForm from './components/ProductsForm'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import LoginPage from './components/LoginPage'
+import HomePage from './components/HomePage'
+import AddProductPage from './components/AddProductPage'
 
 export default function App() {
-    const [page, setPage] = useState('home')
-    const url = "https://h8-phase2-gc.vercel.app"
+    const [page, setPage] = useState('login')
+
     useEffect(() => {
         if (localStorage.access_token) {
-            setPage("home")
+            setPage('home')
         } else {
-            setPage("login")
+            setPage('login')
         }
     }, [])
 
     return (
         <>
-            <Nav setPage={setPage} />
-            {localStorage.access_token && page === 'home' && <Home url={url} />}
-            {!localStorage.access_token && page === 'login' && <Login setPage={setPage} url={url} />}
-            {localStorage.access_token && page === 'form' && <ProductsForm setPage={setPage} url={url} />}
+            <div className="p-5">
+                {page === 'login' && <LoginPage setPage={setPage} />}
+                {page === 'home' && <HomePage setPage={setPage} />}
+                {page === 'add' && <AddProductPage setPage={setPage} />}
+            </div >
         </>
     )
 }
