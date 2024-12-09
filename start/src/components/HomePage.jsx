@@ -24,34 +24,10 @@ export default function HomePage({ setPage }) {
         }
     }
 
-    // useEffect(() => {
-    //     // 1. Lifecyle re-render
-    //     // akan jalan ketika ada perubahan apapun di komponen ini
-    //     console.log('lifecyle re-render');
-    // })
-
-    // useEffect(() => {
-    //     // 2. Lifecyle mounted
-    //     // jalan sekali aja sebelum nge-render pertama kali halaman home (mounted)
-    //     console.log('lifecyle mounted')
-    //     fetchProducts()
-    // }, [])
-
     useEffect(() => {
-        // 3. Lifecyle watchers
-        // jalan sekali aja sebelum nge-render pertama kali halamn home (mounted) & akan jalan setiap state yang kita watch berubah / yang kita taro di dependencies (array kosong)
-        console.log('lifecyle watchers')
         fetchProducts()
     }, [search])
 
-    // useEffect(() => {
-    //     return () => {
-    //         // 4. Lifecyle unmounted
-    //         // akan jalan sebelum proses pencopotan / meninggalkan komponen home 
-
-    //         console.log('lifecyle unmounted');
-    //     }
-    // }, [])
 
     return (
         <>

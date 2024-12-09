@@ -1,12 +1,31 @@
+import { useNavigate } from "react-router";
 import axios from 'axios'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Toastify from 'toastify-js'
-import { useNavigate } from "react-router-dom";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
+
+    useEffect(() => {
+        if (localStorage.access_token) {
+            Toastify({
+                text: "You already logged in",
+                duration: 3000,
+                newWindow: true,
+                close: true,
+                gravity: "bottom", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "#F87171",
+                    color: "#000000"
+                }
+            }).showToast();
+            navigate('/')
+        }
+    }, [navigate])
 
     async function handleLogin(e) {
         // karena submit itu ada refresh by default
@@ -16,7 +35,7 @@ export default function LoginPage() {
 
             localStorage.setItem('access_token', data.data.access_token)
 
-            navigate('/')
+            navigate("/")
             Toastify({
                 text: "Login success",
                 duration: 3000,
@@ -46,7 +65,6 @@ export default function LoginPage() {
             }).showToast();
         }
     }
-
 
     return (
         <>

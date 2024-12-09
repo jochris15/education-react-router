@@ -1,91 +1,105 @@
 # React Router
-[Dokumentasi React Router](https://reactrouter.com/en/main/start/tutorial)
+[Dokumentasi React Router](https://reactrouter.com/home)
+
+**Fokus di section library, karena kita pake react**
 
 ## Konfigurasi Router
-Buatlah sebuah folder router berisikan index.js (kita akan createRouter disini)
 ```
-import {createBrowserRouter,} from "react-router-dom";
-
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <div>Hello world!</div>,
-  },
-]);
-
-export default router
+npm i react-router
 ```
-Jangan taro di app.jsx, kenapa? karena setiap kita merender app.jsx, routerny juga akan kerender ulang, harusnya routernya hanya sekali aja di render, jadi baiknya dipisah
 
-## Navigation
-Jika kita menggunakan anchor tag untuk berpindah halaman, yang terjadi adalah ada proses refresh ketika berpindah halaman, padahal kita menerapkan konsep SPA (Single Page Application), berarti masih ada yang salah untuk cara navigasinya. Kita bisa menggunakan **Link Component**.
+Gunakan App.jsx untuk setup routingan apps kita.
+Contoh pembuatan router :
+```
+ <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />} />
+    </Routes>
+  </BrowserRouter>
+```
+
+[Dokumentasi konfigurasi](https://reactrouter.com/start/library/routing#configuring-routes)
+
+## Navigating
+Jika kita menggunakan anchor tag untuk berpindah halaman, yang terjadi adalah ada proses refresh ketika berpindah halaman, padahal kita menerapkan konsep SPA (Single Page Application), berarti masih ada yang salah untuk cara navigasinya. Kita bisa menggunakan **Link / NavLink Component**.
 
 ### - Link Component
 Dengan menggunakan **Link Component** kita dapat berpindah halaman tanpa harus merefresh halaman. Link component itu bersifat seperti anchor tag biasa
 <br>
-[Dokumentasi Link Component](https://reactrouter.com/en/main/components/link)
 
+[Dokumentasi Link Component](https://reactrouter.com/start/library/navigating#link)
 
-## Programmatic navigation
-Jika kita tadi bisa melakukan navigasi menggunakan link component, selain itu kita juga bisa melakukan navigasi menggunakan **Programmatic navigation**. Kita juga bisa mengirim params menggunakan programmatic navigation. Programmatic navigation bukan bersifat seperti anchor tag
+### - NavLink Component
+Jika kita membutuhkan styling yang berbeda ketika ditekan, kita dapat menggunakan **NavLink Component** , ketika **NavLink** aktif, otomatis akan memiliki className '.active' untuk mempermudah styling.
+<br>
 
-Contoh, ketika kita memencet gambar item, lalu berpindah ke halaman detail, kita dapat menggunakan **Programmatic navigation**
+[Dokumentasi NavLink Component](https://reactrouter.com/start/library/navigating#navlink)
 
 ### - useNavigate
-Untuk menggunakan programmatic navigation, kita perlu hooks **useNavigate**
+Jika kita membutuhkan navigasi secara otomatis tanpa interaksi user setelah melakukan proses tertentu, kita bisa menggunakan react hooks **useNavigate**
 <br>
-[Dokumentasi useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)
+<br>
+Contoh penggunaan :
+- ketika sehabis login akan otomatis pindah ke halaman home
+
+<br>
+
+[Dokumentasi useNavigate](https://reactrouter.com/start/library/navigating#usenavigate)
 
 ## Nested Routes
 Kita bisa membuat sebuah routingan yang bersarang.
 
-Contoh, biasa digunakan untuk layouting. Ketika kita pas login, baru memunculkan navbar, navbarnya ada di halaman utama (parent page) dan halaman lainnya juga menggunakan navbar tersebut.
+Contoh, biasa digunakan untuk layouting. Ketika kita pas login, baru memunculkan navbar, navbarnya ada di halaman utama (parent page) dan halaman lainnya juga menggunakan navbar tersebut. Untuk merender children routes,kita bisa menggunakan **<Outlet/>** di parent routesnya
 <br>
-[Dokumentasi Nested Routes](https://reactrouter.com/en/main/start/overview#nested-routes)
 
-### - Outlet
-Nah, pada saat kita sudah membuat dan memindahkan halaman lain menjadi children dari parent page, kita berpindah ke halaman2 tersebut pasti sudah ada navbarnya, tetapi datanya tidak muncul. Maka dari itu kita perlu menggunakan hooks **Outlet**
-<br>
-[Dokumentasi Outlet](https://reactrouter.com/en/main/components/outlet)
+[Dokumentasi Nested Routes](https://reactrouter.com/start/library/routing#nested-routes)
 
 ### - Nested Path
 Jika kita ingin menuliskan path di parent page dan childrennya pun masing2 memiliki pathnya, kita tidak boleh menuliskan path children dengan menggunakan "/" karena dianggap absolute. Jadi hanya perlu menuliskan pathnya tanpa "/"
 
-```
-{
-        element: <Parent />,
-        children: [
-            {
-                path: "/",
-                element: <Home />
-            },
-            {
-                path: "/about",
-                element: <About />
-                children: [
-                  {
-                    path: "description",
-                    element: <Description />
-                  }
-                ]
-            },
-            {
-                path: "/detail/:name",
-                element: <Detail />
-            }
-        ]
-}
+```js
+<Routes>
+  <Route path="/home" element={BaseLayout}>
+    <Route index element={<Home />} />
+    <Route path="about" element={<About />} />
+    <Route path="edit" element={<Edit />} />
+  </Route>
+</Routes>
+
+// index routes = element default dari parent routesnya
 ```
 
 ## - Params
 Untuk menangkap params yang dikirim lewat router, kita perlu menggunakan hooks **useParams**
 <br>
-[Dokumentasi useParams](https://reactrouter.com/en/main/hooks/use-params)
+[Dokumentasi useParams](https://reactrouter.com/start/library/url-values#route-params)
 
 ## Protected Routes
 Protected Routes maksudnya adalah untuk memproteksi routingan kita, contoh ketika belum login , kita tidak bisa ke halaman home
 
-### Loader
-kita bisa memproteksi routingan kita menggunakan **loader**. Selain itu kita juga menggunakan hooks **redirect** dari react-router-dom untuk meredirect ketika tidak sesuai dengan kondisi yg kita inginkan. Untuk penggunaan loader, harus mereturn suatu nilai, gaboleh undefined.
-<br>
-[Dokumentasi Loader](https://reactrouter.com/en/main/route/loader)
+```js
+import { useEffect } from "react";
+import Navbar from "../components/Navbar";
+import { Outlet, useNavigate } from "react-router";
+
+export default function BaseLayout() {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        if (!localStorage.access_token) {
+            navigate('/login')
+        }
+    }, [navigate])
+
+    return (
+        <>
+            <div className="p-5">
+                <Navbar />
+                <Outlet />
+            </div>
+        </>
+    )
+}
+
+// Gunakan useEffect untuk melakukan navigasi sesuai dengan access_token nya
+```

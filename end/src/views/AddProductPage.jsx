@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import Toastify from 'toastify-js'
-import { useNavigate } from "react-router-dom";
 
 export default function AddProductPage() {
     const [categories, setCategories] = useState([])
@@ -13,8 +12,6 @@ export default function AddProductPage() {
         imgUrl: "",
         categoryId: 0
     })
-
-    const navigate = useNavigate()
 
     async function fetchCategories() {
         try {
@@ -70,7 +67,6 @@ export default function AddProductPage() {
                 }
             })
 
-            navigate('/')
             Toastify({
                 text: `Succeed add data ${data.data.name}`,
                 duration: 3000,

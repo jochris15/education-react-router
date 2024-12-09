@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Card from "../components/Card"
+import Card from "../components/Card";
 import axios from 'axios'
 import gifLoading from '../components/assets/Bean Eater@1x-1.0s-200px-200px.svg'
 
@@ -8,6 +8,7 @@ export default function HomePage() {
     const [search, setSearch] = useState('')
     const [loading, setLoading] = useState(false)
 
+    // function untuk request product dari server
     async function fetchProducts() {
         try {
             setLoading(true)
