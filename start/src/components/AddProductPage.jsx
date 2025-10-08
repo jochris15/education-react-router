@@ -41,21 +41,17 @@ export default function AddProductPage({ setPage }) {
     }
 
     function getFormData(fieldName, event) {
+        let value = event.target.value
         if (fieldName === 'price' || fieldName === 'stock' || fieldName === 'categoryId') {
-            setForm((prevData) => {
-                return {
-                    ...prevData,
-                    [fieldName]: Number(event.target.value)
-                }
-            });
-        } else {
-            setForm((prevData) => {
-                return {
-                    ...prevData,
-                    [fieldName]: event.target.value
-                }
-            });
+            value = +event.target.value
         }
+
+        setForm((prevData) => {
+            return {
+                ...prevData,
+                [fieldName]: value
+            }
+        });
     }
 
     async function handleSubmit(e) {

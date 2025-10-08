@@ -15,7 +15,7 @@ export default function AddProductPage() {
 
     async function fetchCategories() {
         try {
-            const { data } = await axios.get(`https://h8-phase2-gc.vercel.app/apis/branded-things/categories`, {
+            const { data } = await axios.get(`https://api.p2.gc01aio.foxhub.space/apis/products/categories`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.access_token}`
                 }
@@ -61,11 +61,13 @@ export default function AddProductPage() {
         try {
             e.preventDefault()
 
-            const { data } = await axios.post(`https://h8-phase2-gc.vercel.app/apis/branded-things/products`, form, {
+            const { data } = await axios.post(`https://api.p2.gc01aio.foxhub.space/apis/products/products`, form, {
                 headers: {
                     Authorization: `Bearer ${localStorage.access_token}`
                 }
             })
+
+            setPage('home')
 
             Toastify({
                 text: `Succeed add data ${data.data.name}`,

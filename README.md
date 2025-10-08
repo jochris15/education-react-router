@@ -8,17 +8,22 @@
 npm i react-router
 ```
 
-Gunakan App.jsx untuk setup routingan apps kita.
+Buatlah folder router/index.js untuk setup routingan apps kita.
 Contoh pembuatan router :
 ```
- <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />} />
-    </Routes>
-  </BrowserRouter>
+import { createBrowserRouter } from "react-router";
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <div>Hello World</div>,
+  },
+]);
+
+export default router;
 ```
 
-[Dokumentasi konfigurasi](https://reactrouter.com/start/library/routing#configuring-routes)
+[Dokumentasi konfigurasi](https://reactrouter.com/start/data/installation#create-a-router-and-render)
 
 ## Navigating
 Jika kita menggunakan anchor tag untuk berpindah halaman, yang terjadi adalah ada proses refresh ketika berpindah halaman, padahal kita menerapkan konsep SPA (Single Page Application), berarti masih ada yang salah untuk cara navigasinya. Kita bisa menggunakan **Link / NavLink Component**.
@@ -27,13 +32,13 @@ Jika kita menggunakan anchor tag untuk berpindah halaman, yang terjadi adalah ad
 Dengan menggunakan **Link Component** kita dapat berpindah halaman tanpa harus merefresh halaman. Link component itu bersifat seperti anchor tag biasa
 <br>
 
-[Dokumentasi Link Component](https://reactrouter.com/start/library/navigating#link)
+[Dokumentasi Link Component](https://reactrouter.com/start/framework/navigating#link)
 
 ### - NavLink Component
 Jika kita membutuhkan styling yang berbeda ketika ditekan, kita dapat menggunakan **NavLink Component** , ketika **NavLink** aktif, otomatis akan memiliki className '.active' untuk mempermudah styling.
 <br>
 
-[Dokumentasi NavLink Component](https://reactrouter.com/start/library/navigating#navlink)
+[Dokumentasi NavLink Component](https://reactrouter.com/start/framework/navigating#navlink)
 
 ### - useNavigate
 Jika kita membutuhkan navigasi secara otomatis tanpa interaksi user setelah melakukan proses tertentu, kita bisa menggunakan react hooks **useNavigate**
@@ -44,7 +49,7 @@ Contoh penggunaan :
 
 <br>
 
-[Dokumentasi useNavigate](https://reactrouter.com/start/library/navigating#usenavigate)
+[Dokumentasi useNavigate](https://reactrouter.com/start/framework/navigating#usenavigate)
 
 ## Nested Routes
 Kita bisa membuat sebuah routingan yang bersarang.
@@ -52,54 +57,51 @@ Kita bisa membuat sebuah routingan yang bersarang.
 Contoh, biasa digunakan untuk layouting. Ketika kita pas login, baru memunculkan navbar, navbarnya ada di halaman utama (parent page) dan halaman lainnya juga menggunakan navbar tersebut. Untuk merender children routes,kita bisa menggunakan **<Outlet/>** di parent routesnya
 <br>
 
-[Dokumentasi Nested Routes](https://reactrouter.com/start/library/routing#nested-routes)
+[Dokumentasi Nested Routes](https://reactrouter.com/start/data/routing#nested-routes)
 
 ### - Nested Path
 Jika kita ingin menuliskan path di parent page dan childrennya pun masing2 memiliki pathnya, kita tidak boleh menuliskan path children dengan menggunakan "/" karena dianggap absolute. Jadi hanya perlu menuliskan pathnya tanpa "/"
 
 ```js
-<Routes>
-  <Route path="/home" element={BaseLayout}>
-    <Route index element={<Home />} />
-    <Route path="about" element={<About />} />
-    <Route path="edit" element={<Edit />} />
-  </Route>
-</Routes>
-
-// index routes = element default dari parent routesnya
+ {
+        element: <BaseLayout />,
+        path : "/base"
+        children: [
+            {
+                path: "home",
+                element: <HomePage />
+            },
+            {
+                path: "add",
+                element: <AddProductPage />
+            },
+            {
+                path: "detail/:id",
+                element: <DetailPage />
+            }
+        ]
+    }
 ```
 
 ## - Params
 Untuk menangkap params yang dikirim lewat router, kita perlu menggunakan hooks **useParams**
 <br>
-[Dokumentasi useParams](https://reactrouter.com/start/library/url-values#route-params)
+[Dokumentasi useParams](https://reactrouter.com/api/hooks/useParams#summary)
 
 ## Protected Routes
-Protected Routes maksudnya adalah untuk memproteksi routingan kita, contoh ketika belum login , kita tidak bisa ke halaman home
+Protected Routes maksudnya adalah untuk memproteksi routingan kita, contoh ketika belum login , kita tidak bisa ke halaman home. Disini kita akan memanfaatkan loader function yang ada di setiap route. Dan untuk navigasinya bisa menggunakan redirect.
 
 ```js
-import { useEffect } from "react";
-import Navbar from "../components/Navbar";
-import { Outlet, useNavigate } from "react-router";
+{
+        path: "/login",
+        element: <LoginPage />,
+        loader: () => {
+            if (localStorage.token) {
+                // jika sudah login, redirect ke halaman home
+                return redirect("/");
+            }
 
-export default function BaseLayout() {
-    const navigate = useNavigate()
-
-    useEffect(() => {
-        if (!localStorage.access_token) {
-            navigate('/login')
-        }
-    }, [navigate])
-
-    return (
-        <>
-            <div className="p-5">
-                <Navbar />
-                <Outlet />
-            </div>
-        </>
-    )
-}
-
-// Gunakan useEffect untuk melakukan navigasi sesuai dengan access_token nya
+            return null
+        },
+    },
 ```

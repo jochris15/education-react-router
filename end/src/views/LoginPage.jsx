@@ -1,40 +1,20 @@
-import { useNavigate } from "react-router";
 import axios from 'axios'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import Toastify from 'toastify-js'
+import { useNavigate } from "react-router";
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const navigate = useNavigate()
 
-    useEffect(() => {
-        if (localStorage.access_token) {
-            Toastify({
-                text: "You already logged in",
-                duration: 3000,
-                newWindow: true,
-                close: true,
-                gravity: "bottom", // `top` or `bottom`
-                position: "right", // `left`, `center` or `right`
-                stopOnFocus: true, // Prevents dismissing of toast on hover
-                style: {
-                    background: "#F87171",
-                    color: "#000000"
-                }
-            }).showToast();
-            navigate('/')
-        }
-    }, [navigate])
-
     async function handleLogin(e) {
         // karena submit itu ada refresh by default
         e.preventDefault()
         try {
-            const { data } = await axios.post(`https://h8-phase2-gc.vercel.app/apis/login`, { email, password })
+            const { data } = await axios.post(`https://api.p2.gc01aio.foxhub.space/apis/auth/login`, { email, password })
 
-            localStorage.setItem('access_token', data.data.access_token)
-
+            localStorage.setItem('access_token', data.data.token)
             navigate("/")
             Toastify({
                 text: "Login success",
@@ -65,6 +45,7 @@ export default function LoginPage() {
             }).showToast();
         }
     }
+
 
     return (
         <>

@@ -13,9 +13,9 @@ export default function HomePage() {
         try {
             setLoading(true)
 
-            const { data } = await axios.get(`https://h8-phase2-gc.vercel.app/apis/pub/branded-things/products?q=${search}&limit=12`)
+            const { data } = await axios.get(`https://api.p2.gc01aio.foxhub.space/apis/pub/products/products?q=${search}`)
 
-            setProducts(data.data.query)
+            setProducts(data.data)
         } catch (error) {
             console.log(error);
         } finally {
