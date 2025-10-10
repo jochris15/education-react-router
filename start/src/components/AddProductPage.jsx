@@ -1,4 +1,4 @@
-import Navbar from '../components/Navbar'
+import Navbar from './Navbar'
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import Toastify from 'toastify-js'
@@ -16,7 +16,7 @@ export default function AddProductPage({ setPage }) {
 
     async function fetchCategories() {
         try {
-            const { data } = await axios.get(`https://h8-phase2-gc.vercel.app/apis/branded-things/categories`, {
+            const { data } = await axios.get(`https://api.p2.gc01aio.foxhub.space/apis/products/categories`, {
                 headers: {
                     Authorization: `Bearer ${localStorage.access_token}`
                 }
@@ -25,7 +25,7 @@ export default function AddProductPage({ setPage }) {
             setCategories(data.data)
         } catch (error) {
             Toastify({
-                text: error.response.data.error,
+                text: error.response.data.message,
                 duration: 3000,
                 newWindow: true,
                 close: true,
@@ -58,7 +58,7 @@ export default function AddProductPage({ setPage }) {
         try {
             e.preventDefault()
 
-            const { data } = await axios.post(`https://h8-phase2-gc.vercel.app/apis/branded-things/products`, form, {
+            const { data } = await axios.post(`https://api.p2.gc01aio.foxhub.space/apis/products/products`, form, {
                 headers: {
                     Authorization: `Bearer ${localStorage.access_token}`
                 }
@@ -81,7 +81,7 @@ export default function AddProductPage({ setPage }) {
             }).showToast();
         } catch (error) {
             Toastify({
-                text: error.response.data.error,
+                text: error.response.data.message,
                 duration: 3000,
                 newWindow: true,
                 close: true,
@@ -115,7 +115,7 @@ export default function AddProductPage({ setPage }) {
                         <input
                             type="text"
                             placeholder="Enter Name"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("name", event)}
                         />
                     </div>
@@ -126,7 +126,7 @@ export default function AddProductPage({ setPage }) {
                         <input
                             type="text"
                             placeholder="Enter Description"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("description", event)}
                         />
                     </div>
@@ -137,7 +137,7 @@ export default function AddProductPage({ setPage }) {
                         <input
                             type="number"
                             placeholder="Enter Price"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("price", event)}
                         />
                     </div>
@@ -148,7 +148,7 @@ export default function AddProductPage({ setPage }) {
                         <input
                             type="number"
                             placeholder="Enter Stock"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("stock", event)}
                         />
                     </div>
@@ -159,7 +159,7 @@ export default function AddProductPage({ setPage }) {
                         <input
                             type="text"
                             placeholder="Enter Image URL"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("imgUrl", event)}
                         />
                     </div>
@@ -168,7 +168,7 @@ export default function AddProductPage({ setPage }) {
                             <span className="font-bold">Category</span>
                         </label>
                         <select
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             name="category"
                             onChange={(event) => getFormData("categoryId", event)}
                         >

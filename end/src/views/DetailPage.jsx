@@ -3,7 +3,6 @@ import axios from 'axios'
 import { useEffect, useState } from 'react';
 import gifLoading from '../components/assets/Bean Eater@1x-1.0s-200px-200px.svg'
 
-
 export default function DetailPage() {
     const { id } = useParams()
     const [product, setProduct] = useState("")
@@ -16,8 +15,6 @@ export default function DetailPage() {
 
             const { data } = await axios.get(`https://api.p2.gc01aio.foxhub.space/apis/pub/products/products/${id}`)
 
-            console.log(data.data);
-
             setProduct(data.data)
         } catch (error) {
             console.log(error);
@@ -26,11 +23,10 @@ export default function DetailPage() {
         }
     }
 
-
     useEffect(() => {
         fetchProduct()
-    }, []
-    )
+    }, [])
+
     return (
         <>
             {loading ? (

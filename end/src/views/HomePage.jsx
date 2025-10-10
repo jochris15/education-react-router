@@ -13,7 +13,7 @@ export default function HomePage() {
         try {
             setLoading(true)
 
-            const { data } = await axios.get(`https://api.p2.gc01aio.foxhub.space/apis/pub/products/products?q=${search}`)
+            const { data } = await axios.get(`https://api.p2.gc01aio.foxhub.space/apis/pub/products/products?limit=12&q=${search}`)
 
             setProducts(data.data)
         } catch (error) {
@@ -24,9 +24,9 @@ export default function HomePage() {
     }
 
     useEffect(() => {
+        // jalan sekali aja sebelum nge-render pertama kali halamn home (mounted) & akan jalan setiap state yang kita watch berubah / yang kita taro di dependencies (array kosong)
         fetchProducts()
     }, [search])
-
 
     return (
         <>
@@ -81,8 +81,6 @@ export default function HomePage() {
                     </>
                 )
             }
-
-
         </>
     )
 }

@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { useState } from 'react';
 import Toastify from 'toastify-js'
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router"
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
@@ -31,7 +31,7 @@ export default function LoginPage() {
             }).showToast();
         } catch (error) {
             Toastify({
-                text: error.response.data.error,
+                text: error.response.data.message,
                 duration: 3000,
                 newWindow: true,
                 close: true,
@@ -46,12 +46,15 @@ export default function LoginPage() {
         }
     }
 
+    if (localStorage.access_token) {
+        return <Navigate to="/" />
+    }
 
     return (
         <>
             {/* login */}
             <div className="min-h-screen flex items-center justify-center w-full">
-                <div className="rounded-lg px-8 py-6 w-1/3 bg-blue-400 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                <div className="rounded-lg px-8 py-6 w-1/3 bg-blue-400 border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                     <h1 className="text-2xl font-bold text-center mb-4">Login</h1>
                     <form onSubmit={handleLogin}>
                         <div className="mb-4">
@@ -61,7 +64,7 @@ export default function LoginPage() {
                             <input
                                 type="email"
                                 id="email"
-                                className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                                className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                                 placeholder="your@email.com"
                                 autoComplete='current-email'
                                 onChange={(e) => setEmail(e.target.value)}
@@ -74,7 +77,7 @@ export default function LoginPage() {
                             <input
                                 type="password"
                                 id="password"
-                                className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                                className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                                 placeholder="Enter your password"
                                 autoComplete='current-password'
                                 onChange={(e) => setPassword(e.target.value)}

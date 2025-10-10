@@ -1,10 +1,9 @@
-import { NavLink } from "react-router"
-import { useNavigate } from "react-router";
+import { NavLink, useNavigate } from "react-router"
 
 export default function Navbar() {
     const navigate = useNavigate()
 
-    function handleLogout() {
+    async function handleLogout() {
         localStorage.clear()
         navigate('/login')
     }
@@ -14,21 +13,17 @@ export default function Navbar() {
             {/* navbar */}
             <nav className="sticky top-0 z-10 p-3 bg-purple-400 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)] flex justify-center">
                 <div>
-                    <NavLink to={{ pathname: "/" }} className={({ isActive }) =>
-                        [
-                            isActive ? "text-2xl font-bold px-6 cursor-pointer underline" : "text-2xl font-bold px-6 cursor-pointer",
-                        ].join(" ")
+                    <NavLink to="/" className={({ isActive }) =>
+                        isActive ? "text-2xl font-bold px-6 cursor-pointer underline" : "text-2xl font-bold px-6 cursor-pointer"
                     }>
                         <span>Home</span>
                     </NavLink>
                     <NavLink to="/add" className={({ isActive }) =>
-                        [
-                            isActive ? "text-2xl font-bold px-6 cursor-pointer underline" : "text-2xl font-bold px-6 cursor-pointer",
-                        ].join(" ")
+                        isActive ? "text-2xl font-bold px-6 cursor-pointer underline" : "text-2xl font-bold px-6 cursor-pointer"
                     }>
                         <span>Add Product</span>
                     </NavLink>
-                    <a className="text-2xl font-bold px-6 cursor-pointer"
+                    <a className="text-2xl font-bold px-6 cursor-pointer text-white"
                         onClick={handleLogout}>
                         <span>Logout</span>
                     </a>

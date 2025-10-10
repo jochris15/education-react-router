@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import Toastify from 'toastify-js'
+import { useNavigate } from "react-router"
 
 export default function AddProductPage() {
     const [categories, setCategories] = useState([])
@@ -12,6 +13,7 @@ export default function AddProductPage() {
         imgUrl: "",
         categoryId: 0
     })
+    const navigate = useNavigate()
 
     async function fetchCategories() {
         try {
@@ -24,7 +26,7 @@ export default function AddProductPage() {
             setCategories(data.data)
         } catch (error) {
             Toastify({
-                text: error.response.data.error,
+                text: error.response.data.message,
                 duration: 3000,
                 newWindow: true,
                 close: true,
@@ -40,21 +42,17 @@ export default function AddProductPage() {
     }
 
     function getFormData(fieldName, event) {
+        let value = event.target.value
         if (fieldName === 'price' || fieldName === 'stock' || fieldName === 'categoryId') {
-            setForm((prevData) => {
-                return {
-                    ...prevData,
-                    [fieldName]: Number(event.target.value)
-                }
-            });
-        } else {
-            setForm((prevData) => {
-                return {
-                    ...prevData,
-                    [fieldName]: event.target.value
-                }
-            });
+            value = +event.target.value
         }
+
+        setForm((prevData) => {
+            return {
+                ...prevData,
+                [fieldName]: value
+            }
+        });
     }
 
     async function handleSubmit(e) {
@@ -67,8 +65,7 @@ export default function AddProductPage() {
                 }
             })
 
-            setPage('home')
-
+            navigate("/")
             Toastify({
                 text: `Succeed add data ${data.data.name}`,
                 duration: 3000,
@@ -84,7 +81,7 @@ export default function AddProductPage() {
             }).showToast();
         } catch (error) {
             Toastify({
-                text: error.response.data.error,
+                text: error.response.data.message,
                 duration: 3000,
                 newWindow: true,
                 close: true,
@@ -117,7 +114,7 @@ export default function AddProductPage() {
                         <input
                             type="text"
                             placeholder="Enter Name"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("name", event)}
                         />
                     </div>
@@ -128,7 +125,7 @@ export default function AddProductPage() {
                         <input
                             type="text"
                             placeholder="Enter Description"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("description", event)}
                         />
                     </div>
@@ -139,7 +136,7 @@ export default function AddProductPage() {
                         <input
                             type="number"
                             placeholder="Enter Price"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("price", event)}
                         />
                     </div>
@@ -150,7 +147,7 @@ export default function AddProductPage() {
                         <input
                             type="number"
                             placeholder="Enter Stock"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("stock", event)}
                         />
                     </div>
@@ -161,7 +158,7 @@ export default function AddProductPage() {
                         <input
                             type="text"
                             placeholder="Enter Image URL"
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             onChange={(event) => getFormData("imgUrl", event)}
                         />
                     </div>
@@ -170,7 +167,7 @@ export default function AddProductPage() {
                             <span className="font-bold">Category</span>
                         </label>
                         <select
-                            className="rounded-2xl w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                            className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                             name="category"
                             onChange={(event) => getFormData("categoryId", event)}
                         >

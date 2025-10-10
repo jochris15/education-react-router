@@ -13,8 +13,8 @@ export default function Card({ product }) {
                     </div>
                     <div className="flex flex-col divide-y divide-black">
                         <b className="mt-5">{product.name}</b>
-                        <p>
-                            {product.description.length > 100 ? product.description.substring(0, 100) + " . . ." : product.description}
+                        <p className="line-clamp-3">
+                            {product.description}
                         </p>
                     </div>
                 </div>

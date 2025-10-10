@@ -1,0 +1,152 @@
+[
+    {
+        "id": 25,
+        "name": "Watches",
+        "createdAt": "2025-10-07T07:41:28.233Z",
+        "updatedAt": "2025-10-07T07:41:28.233Z"
+    },
+    {
+        "id": 24,
+        "name": "Bags & Luggage",
+        "createdAt": "2025-10-07T07:41:28.222Z",
+        "updatedAt": "2025-10-07T07:41:28.222Z"
+    },
+    {
+        "id": 23,
+        "name": "Video Games",
+        "createdAt": "2025-10-07T07:41:28.211Z",
+        "updatedAt": "2025-10-07T07:41:28.211Z"
+    },
+    {
+        "id": 22,
+        "name": "Movies & TV Shows",
+        "createdAt": "2025-10-07T07:41:28.199Z",
+        "updatedAt": "2025-10-07T07:41:28.199Z"
+    },
+    {
+        "id": 21,
+        "name": "Art & Craft Supplies",
+        "createdAt": "2025-10-07T07:41:28.188Z",
+        "updatedAt": "2025-10-07T07:41:28.188Z"
+    },
+    {
+        "id": 20,
+        "name": "Groceries & Gourmet Food",
+        "createdAt": "2025-10-07T07:41:28.177Z",
+        "updatedAt": "2025-10-07T07:41:28.177Z"
+    },
+    {
+        "id": 19,
+        "name": "Tools & Hardware",
+        "createdAt": "2025-10-07T07:41:28.166Z",
+        "updatedAt": "2025-10-07T07:41:28.166Z"
+    },
+    {
+        "id": 18,
+        "name": "Garden & Outdoor",
+        "createdAt": "2025-10-07T07:41:28.154Z",
+        "updatedAt": "2025-10-07T07:41:28.154Z"
+    },
+    {
+        "id": 17,
+        "name": "Office Supplies",
+        "createdAt": "2025-10-07T07:41:28.143Z",
+        "updatedAt": "2025-10-07T07:41:28.143Z"
+    },
+    {
+        "id": 16,
+        "name": "Pet Supplies",
+        "createdAt": "2025-10-07T07:41:28.132Z",
+        "updatedAt": "2025-10-07T07:41:28.132Z"
+    },
+    {
+        "id": 15,
+        "name": "Musical Instruments",
+        "createdAt": "2025-10-07T07:41:28.120Z",
+        "updatedAt": "2025-10-07T07:41:28.120Z"
+    },
+    {
+        "id": 14,
+        "name": "Jewelry & Accessories",
+        "createdAt": "2025-10-07T07:41:28.109Z",
+        "updatedAt": "2025-10-07T07:41:28.109Z"
+    },
+    {
+        "id": 13,
+        "name": "Baby Products",
+        "createdAt": "2025-10-07T07:41:28.097Z",
+        "updatedAt": "2025-10-07T07:41:28.097Z"
+    },
+    {
+        "id": 12,
+        "name": "Books & Stationery",
+        "createdAt": "2025-10-07T07:41:28.084Z",
+        "updatedAt": "2025-10-07T07:41:28.084Z"
+    },
+    {
+        "id": 11,
+        "name": "Toys & Games",
+        "createdAt": "2025-10-07T07:41:28.072Z",
+        "updatedAt": "2025-10-07T07:41:28.072Z"
+    },
+    {
+        "id": 10,
+        "name": "Automotive",
+        "createdAt": "2025-10-07T07:41:28.061Z",
+        "updatedAt": "2025-10-07T07:41:28.061Z"
+    },
+    {
+        "id": 9,
+        "name": "Sports & Outdoors",
+        "createdAt": "2025-10-07T07:41:28.050Z",
+        "updatedAt": "2025-10-07T07:41:28.050Z"
+    },
+    {
+        "id": 8,
+        "name": "Kitchen & Dining",
+        "createdAt": "2025-10-07T07:41:28.039Z",
+        "updatedAt": "2025-10-07T07:41:28.039Z"
+    },
+    {
+        "id": 7,
+        "name": "Home Appliances",
+        "createdAt": "2025-10-07T07:41:28.027Z",
+        "updatedAt": "2025-10-07T07:41:28.027Z"
+    },
+    {
+        "id": 6,
+        "name": "Health & Wellness",
+        "createdAt": "2025-10-07T07:41:28.016Z",
+        "updatedAt": "2025-10-07T07:41:28.016Z"
+    },
+    {
+        "id": 5,
+        "name": "Beauty & Personal Care",
+        "createdAt": "2025-10-07T07:41:28.004Z",
+        "updatedAt": "2025-10-07T07:41:28.004Z"
+    },
+    {
+        "id": 4,
+        "name": "Footwear",
+        "createdAt": "2025-10-07T07:41:27.993Z",
+        "updatedAt": "2025-10-07T07:41:27.993Z"
+    },
+    {
+        "id": 3,
+        "name": "Clothing",
+        "createdAt": "2025-10-07T07:41:27.982Z",
+        "updatedAt": "2025-10-07T07:41:27.982Z"
+    },
+    {
+        "id": 2,
+        "name": "Furniture",
+        "createdAt": "2025-10-07T07:41:27.971Z",
+        "updatedAt": "2025-10-07T07:41:27.971Z"
+    },
+    {
+        "id": 1,
+        "name": "Electronics",
+        "createdAt": "2025-10-07T07:41:27.957Z",
+        "updatedAt": "2025-10-07T07:41:27.957Z"
+    }
+]

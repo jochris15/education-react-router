@@ -1,7 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import LoginPage from './components/LoginPage'
 import HomePage from './components/HomePage'
 import AddProductPage from './components/AddProductPage'
+import { useEffect } from 'react'
 
 export default function App() {
     const [page, setPage] = useState('login')
@@ -17,9 +18,9 @@ export default function App() {
     return (
         <>
             <div className="p-5">
-                {page === 'login' && <LoginPage setPage={setPage} />}
-                {page === 'home' && <HomePage setPage={setPage} />}
-                {page === 'add' && <AddProductPage setPage={setPage} />}
+                {page === 'login' && !localStorage.access_token && < LoginPage setPage={setPage} />}
+                {page === 'home' && localStorage.access_token && <HomePage setPage={setPage} />}
+                {page === 'add' && localStorage.access_token && <AddProductPage setPage={setPage} />}
             </div >
         </>
     )
