@@ -1,6 +1,6 @@
 # [React Router](https://reactrouter.com/home)
 
-**Fokus di section library, karena kita pake react**
+**Fokus di section Declarative mode / Data mode, karena kita pake react (library). Pada demo kali ini kita akan menggunakan Declarative mode**
 
 ## [Konfigurasi Router](https://reactrouter.com/start/declarative/installation)
 ```
