@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import Navbar from "../components/Navbar";
 import Card from "../components/Card";
 import axios from 'axios'
 import baseUrl from "../constant/baseUrl";
 import loadingGIF from '../assets/loading.svg'
 
-export default function Home({ setPage }) {
+export default function Home() {
     const [movies, setMovies] = useState([])
     const [loading, setLoading] = useState(false)
     const [search, setSearch] = useState("")
@@ -70,7 +69,6 @@ export default function Home({ setPage }) {
 
     return (
         <>
-            <Navbar setPage={setPage} />
             {/* <button className="w-full bg-blue-400" onClick={() => setCount(count + 1)}>{count}</button>
             <button className="w-full bg-red-400" onClick={() => setCount2(count2 + 1)}>{count2}</button> */}
 

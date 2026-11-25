@@ -2,10 +2,12 @@ import axios from "axios"
 import { useState } from "react"
 import baseUrl from "../constant/baseUrl"
 import Toastify from 'toastify-js'
+import { Navigate, useNavigate } from "react-router"
 
-export default function Login({ setPage }) {
+export default function Login() {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const navigate = useNavigate()
 
     async function handleLogin(e) {
         e.preventDefault()
@@ -25,7 +27,7 @@ export default function Login({ setPage }) {
                     background: "#008000",
                 },
             }).showToast();
-            setPage("home")
+            navigate("/")
         } catch (error) {
             Toastify({
                 text: error.response.data.message,
@@ -40,6 +42,22 @@ export default function Login({ setPage }) {
                 },
             }).showToast();
         }
+    }
+
+    if (localStorage.getItem("token")) {
+        Toastify({
+            text: "You already logged in",
+            duration: 3000,
+            newWindow: true,
+            close: true,
+            gravity: "bottom", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "#FF0000",
+            },
+        }).showToast();
+        return <Navigate to="/" />
     }
 
     return (

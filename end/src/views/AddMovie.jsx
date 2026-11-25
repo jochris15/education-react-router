@@ -1,10 +1,9 @@
 import { useEffect, useState } from 'react'
-import Navbar from '../components/Navbar'
 import axios from 'axios';
 import baseUrl from '../constant/baseUrl';
 import Toastify from 'toastify-js'
 
-export default function AddMovie({ setPage }) {
+export default function AddMovie() {
     const [genre, setGenre] = useState([])
     const [form, setForm] = useState({
         title: "",
@@ -45,8 +44,6 @@ export default function AddMovie({ setPage }) {
                     background: "#008000",
                 },
             }).showToast();
-
-            setPage("home")
         } catch (error) {
             Toastify({
                 text: error.response.data.message,
@@ -82,7 +79,6 @@ export default function AddMovie({ setPage }) {
     }, [])
     return (
         <>
-            <Navbar setPage={setPage} />
             {/* add form */}
             <form className="p-5 mt-5 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)] bg-red-400" onSubmit={handleSubmit}>
                 <h1 className="text-2xl font-bold text-center mb-4">Add New Movie</h1>

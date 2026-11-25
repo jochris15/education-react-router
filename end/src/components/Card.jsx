@@ -1,13 +1,18 @@
+import { Link } from "react-router";
+
 export default function Card({ movie, idx }) {
     return (
         <>
             <div className={`h-full flex flex-col gap-5 justify-center items-center border-2 border-black p-5 rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)] ${idx % 2 === 0 ? "bg-blue-400" : "bg-yellow-400"}`}>
                 <div className="h-full">
-                    <img
-                        src={movie.imgUrl}
-                        alt="movie image"
-                        className="border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
-                    />
+                    <Link to={`/detail/${movie.id}`}>
+                        <img
+                            src={movie.imgUrl}
+                            alt="movie image"
+                            className="border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)] cursor-pointer"
+                        />
+                    </Link>
+
                 </div>
                 <div className="h-full">
                     <b>{movie.title}</b>
