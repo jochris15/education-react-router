@@ -1,23 +1,20 @@
-import { BrowserRouter, Routes, Route } from "react-router";
-import LoginPage from './views/LoginPage'
-import HomePage from './views/HomePage'
-import AddProductPage from './views/AddProductPage'
-import BaseLayout from "./views/BaseLayout";
-import DetailPage from "./views/DetailPage";
+import { useState } from "react"
+import Home from "./views/Home"
+import Login from "./views/Login"
+import AddMovie from "./views/AddMovie"
 
-export default function App() {
-    return (
-        <>
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route element={<BaseLayout />}>
-                        <Route path="/" index element={<HomePage />} />
-                        <Route path="/add" element={<AddProductPage />} />
-                        <Route path="/detail/:id" element={<DetailPage />} />
-                    </Route>
-                </Routes>
-            </BrowserRouter>,
-        </>
-    )
+function App() {
+  const [page, setPage] = useState("login")
+
+  return (
+    <>
+      <div className="p-5">
+        {page === 'login' && <Login setPage={setPage} />}
+        {page === 'home' && <Home setPage={setPage} />}
+        {page === 'add' && <AddMovie setPage={setPage} />}
+      </div>
+    </>
+  )
 }
+
+export default App

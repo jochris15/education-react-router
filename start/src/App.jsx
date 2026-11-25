@@ -1,27 +1,20 @@
-import { useState } from 'react'
-import LoginPage from './components/LoginPage'
-import HomePage from './components/HomePage'
-import AddProductPage from './components/AddProductPage'
-import { useEffect } from 'react'
+import { useState } from "react"
+import Home from "./views/Home"
+import Login from "./views/Login"
+import AddMovie from "./views/AddMovie"
 
-export default function App() {
-    const [page, setPage] = useState('login')
+function App() {
+  const [page, setPage] = useState("login")
 
-    useEffect(() => {
-        if (localStorage.access_token) {
-            setPage('home')
-        } else {
-            setPage('login')
-        }
-    }, [])
-
-    return (
-        <>
-            <div className="p-5">
-                {page === 'login' && !localStorage.access_token && < LoginPage setPage={setPage} />}
-                {page === 'home' && localStorage.access_token && <HomePage setPage={setPage} />}
-                {page === 'add' && localStorage.access_token && <AddProductPage setPage={setPage} />}
-            </div >
-        </>
-    )
+  return (
+    <>
+      <div className="p-5">
+        {page === 'login' && <Login setPage={setPage} />}
+        {page === 'home' && <Home setPage={setPage} />}
+        {page === 'add' && <AddMovie setPage={setPage} />}
+      </div>
+    </>
+  )
 }
+
+export default App

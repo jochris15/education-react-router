@@ -1,21 +1,20 @@
-import axios from 'axios'
-import { useState } from 'react';
+import axios from "axios"
+import { useState } from "react"
+import baseUrl from "../constant/baseUrl"
 import Toastify from 'toastify-js'
 
-export default function LoginPage({ setPage }) {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
+export default function Login({ setPage }) {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
     async function handleLogin(e) {
-        // karena submit itu ada refresh by default
         e.preventDefault()
         try {
-            const { data } = await axios.post(`https://api.p2.gc01aio.foxhub.space/apis/auth/login`, { email, password })
+            const { data } = await axios.post(`${baseUrl}/apis/auth/login`, { email, password })
+            localStorage.setItem("token", data.data.token)
 
-            localStorage.setItem('access_token', data.data.token)
-            setPage('home')
             Toastify({
-                text: "Login success",
+                text: "Login Succeed",
                 duration: 3000,
                 newWindow: true,
                 close: true,
@@ -23,10 +22,10 @@ export default function LoginPage({ setPage }) {
                 position: "right", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
-                    background: "#34D399",
-                    color: "#000000"
+                    background: "#008000",
                 },
             }).showToast();
+            setPage("home")
         } catch (error) {
             Toastify({
                 text: error.response.data.message,
@@ -37,13 +36,11 @@ export default function LoginPage({ setPage }) {
                 position: "right", // `left`, `center` or `right`
                 stopOnFocus: true, // Prevents dismissing of toast on hover
                 style: {
-                    background: "#F87171",
-                    color: "#000000"
-                }
+                    background: "#FF0000",
+                },
             }).showToast();
         }
     }
-
 
     return (
         <>
@@ -59,10 +56,10 @@ export default function LoginPage({ setPage }) {
                             <input
                                 type="email"
                                 id="email"
-                                className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                                className="bg-white rounded-2xl w-full px-3 py-2 border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                                 placeholder="your@email.com"
-                                autoComplete='current-email'
                                 onChange={(e) => setEmail(e.target.value)}
+                                autoComplete="current-email"
                             />
                         </div>
                         <div className="mb-4">
@@ -72,13 +69,13 @@ export default function LoginPage({ setPage }) {
                             <input
                                 type="password"
                                 id="password"
-                                className="bg-white w-full px-3 py-2 border-2 border-black rounded-2xl shadow-[2px_2px_0px_rgba(0,0,0,1)]"
+                                className="bg-white rounded-2xl w-full px-3 py-2 border-2 border-black shadow-[2px_2px_0px_rgba(0,0,0,1)]"
                                 placeholder="Enter your password"
-                                autoComplete='current-password'
                                 onChange={(e) => setPassword(e.target.value)}
+                                autoComplete="current-password"
                             />
                         </div>
-                        <button className="w-full mt-5 py-2 px-4 border-2 border-black rounded-2xl text-sm font-medium text-white bg-gray-700 hover:bg-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
+                        <button className="w-full mt-5 justify-center py-2 px-4 border-2 border-black rounded-2xl text-sm font-medium text-white bg-gray-700 hover:bg-black shadow-[2px_2px_0px_rgba(0,0,0,1)]">
                             Login
                         </button>
                     </form>

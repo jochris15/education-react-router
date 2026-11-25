@@ -1,5 +1,7 @@
 # [React Router](https://reactrouter.com/home)
 
+Apa itu react router? React Router adalah library yang digunakan untuk melakukan routing di react. Routing adalah proses berpindah halaman, misalnya dari halaman login ke halaman home.
+
 **Fokus di section Declarative mode / Data mode, karena kita pake react (library). Pada demo kali ini kita akan menggunakan Declarative mode**
 
 ## [Konfigurasi Router](https://reactrouter.com/start/declarative/installation)
@@ -12,18 +14,18 @@ Kita akan menggunakan `App.jsx` sebagai komponen utama tempat setup routernya. B
 Contoh pembuatan router :
 ```jsx
 import { BrowserRouter, Routes, Route } from "react-router";
-import LoginPage from './views/LoginPage'
-import HomePage from './views/HomePage'
-import AddProductPage from './views/AddProductPage'
+import Login from './views/Login'
+import Home from './views/Home'
+import AddMovie from './views/AddMovie'
 
 export default function App() {
     return (
         <>
             <BrowserRouter>
                 <Routes>
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/" element={<HomePage />} />
-                    <Route path="/add" element={<AddProductPage />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/" element={<Home />} />
+                    <Route path="/add" element={<AddMovie />} />
                 </Routes>
             </BrowserRouter>,
         </>
@@ -88,7 +90,7 @@ Kenapa kita menggunakan `Navigate` component? Karena jika kita menggunakan `useN
 ```js
 import { Navigate } from "react-router";
 
-export default functio BaseLayout() {
+export default function BaseLayout() {
     if (!localStorage.access_token) {
         return <Navigate to="/login" />
     }
